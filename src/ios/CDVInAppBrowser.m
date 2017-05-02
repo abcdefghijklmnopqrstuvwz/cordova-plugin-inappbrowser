@@ -162,9 +162,9 @@
 
     [self.inAppBrowserViewController showLocationBar:browserOptions.location];
     [self.inAppBrowserViewController showToolBar:browserOptions.toolbar :browserOptions.toolbarposition];
-    if (browserOptions.closebuttoncaption != nil) {
-        [self.inAppBrowserViewController setCloseButtonTitle:browserOptions.closebuttoncaption];
-    }
+//    if (browserOptions.closebuttoncaption != nil) {
+//        [self.inAppBrowserViewController setCloseButtonTitle:browserOptions.closebuttoncaption];
+//    }
     // Set Presentation Style
     UIModalPresentationStyle presentationStyle = UIModalPresentationFullScreen; // default
     if (browserOptions.presentationstyle != nil) {
@@ -443,7 +443,7 @@
     else if ((self.callbackId != nil) && isTopLevelNavigation) {
         // Send a loadstart event for each top-level navigation (includes redirects).
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
-                                                      messageAsDictionary:@{@"type":@"loadstart", @"url":[url absoluteString]}];
+                                                    messageAsDictionary:@{@"type":@"loadstart", @"url":[url absoluteString]}];
         [pluginResult setKeepCallback:[NSNumber numberWithBool:YES]];
 
         [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
@@ -575,9 +575,6 @@
     self.spinner.userInteractionEnabled = NO;
     [self.spinner stopAnimating];
 
-    self.closeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(close)];
-    self.closeButton.enabled = YES;
-
     UIBarButtonItem* flexibleSpaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 
     UIBarButtonItem* fixedSpaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
@@ -642,6 +639,11 @@
     self.backButton.enabled = YES;
     self.backButton.imageInsets = UIEdgeInsetsZero;
     
+    NSString* reloadArrowString = @"↻"; // ↻↺ create reload from Unicode char
+    self.closeButton = [[UIBarButtonItem alloc] initWithTitle:reloadArrowString style:UIBarButtonItemStyleBordered target:self action:@selector(reload)];
+    self.closeButton.enabled = YES;
+    self.closeButton.imageInsets = UIEdgeInsetsZero;
+    
     
     [self.toolbar setItems:@[self.closeButton, flexibleSpaceButton, self.backButton, fixedSpaceButton, self.forwardButton]];
 
@@ -662,14 +664,14 @@
     // the advantage of using UIBarButtonSystemItemDone is the system will localize it for you automatically
     // but, if you want to set this yourself, knock yourself out (we can't set the title for a system Done button, so we have to create a new one)
     
-    NSString* reloadArrowString = @"↻"; // ↻↺ create reload from Unicode char
-    self.closeButton = nil;
-    self.closeButton = [[UIBarButtonItem alloc] initWithTitle:reloadArrowString style:UIBarButtonItemStyleBordered target:self action:@selector(reload)];
-    self.closeButton.enabled = YES;
+    //NSString* reloadArrowString = @"↻"; // ↻↺ create reload from Unicode char
+    //self.closeButton = nil;
+    //self.closeButton = [[UIBarButtonItem alloc] initWithTitle:reloadArrowString style:UIBarButtonItemStyleBordered target:self action:@selector(reload)];
+    //self.closeButton.enabled = YES;
 
-    NSMutableArray* items = [self.toolbar.items mutableCopy];
-    [items replaceObjectAtIndex:0 withObject:self.closeButton];
-    [self.toolbar setItems:items];
+    //NSMutableArray* items = [self.toolbar.items mutableCopy];
+    //[items replaceObjectAtIndex:0 withObject:self.closeButton];
+    //[self.toolbar setItems:items];
 }
 
 - (void)showLocationBar:(BOOL)show
