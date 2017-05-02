@@ -906,7 +906,8 @@
 {
     // update url, stop spinner, update back/forward
 
-    self.addressLabel.text = [self.currentURL absoluteString];
+    //self.addressLabel.text = [self.currentURL absoluteString];
+    self.addressLabel.text = NSLocalizedString(@"Edooc FSG", nil);
     self.backButton.enabled = theWebView.canGoBack;
     self.forwardButton.enabled = theWebView.canGoForward;
 
