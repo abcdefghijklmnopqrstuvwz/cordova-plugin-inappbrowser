@@ -35,6 +35,23 @@
 
     <!-- android -->
     <platform name="android">
+        <js-module src="www/themeablebrowser.js" name="themeablebrowser">
+            <clobbers target="cordova.ThemeableBrowser" />
+        </js-module>
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="ThemeableBrowser">
+                <param name="android-package" value="com.initialxy.cordova.themeablebrowser.ThemeableBrowser"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/ThemeableBrowser.java" target-dir="src/com/initialxy/cordova/themeablebrowser" />
+        <source-file src="src/android/ThemeableBrowserDialog.java" target-dir="src/com/initialxy/cordova/themeablebrowser" />
+        <source-file src="src/android/InAppChromeClient.java" target-dir="src/com/initialxy/cordova/themeablebrowser" />
+        <source-file src="src/android/ThemeableBrowserUnmarshaller.java" target-dir="src/com/initialxy/cordova/themeablebrowser" />
+    </platform>
+
+    <!-- android -->
+    <!--platform name="android">
         <js-module src="www/inappbrowser.js" name="inappbrowser">
             <clobbers target="cordova.InAppBrowser.open" />
             <clobbers target="window.open" />
@@ -49,7 +66,7 @@
         <source-file src="src/android/InAppBrowserDialog.java" target-dir="src/org/apache/cordova/inappbrowser" />
         <source-file src="src/android/InAppChromeClient.java" target-dir="src/org/apache/cordova/inappbrowser" />
 
-        <!--  drawable src/android/resources -->
+        <!--  drawable src/android/resources -- >
         <resource-file src="src/android/res/drawable-hdpi/ic_action_next_item.png" target="res/drawable-hdpi/ic_action_next_item.png" />
         <resource-file src="src/android/res/drawable-mdpi/ic_action_next_item.png" target="res/drawable-mdpi/ic_action_next_item.png" />
         <resource-file src="src/android/res/drawable-xhdpi/ic_action_next_item.png" target="res/drawable-xhdpi/ic_action_next_item.png" />
@@ -65,7 +82,7 @@
         <resource-file src="src/android/res/drawable-xhdpi/ic_action_remove.png" target="res/drawable-xhdpi/ic_action_remove.png" />
         <resource-file src="src/android/res/drawable-xxhdpi/ic_action_remove.png" target="res/drawable-xxhdpi/ic_action_remove.png" />
 
-    </platform>
+    </platform-->
 
     <!-- ios -->
     <platform name="ios">
